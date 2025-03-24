@@ -241,11 +241,11 @@ const googleCallback = async (req, res) => {
         console.log("usertype: ", user.type, " ,process.env.ONLYTEACHERS: ", process.env.ONLYTEACHERS);
         if(process.env.ONLYTEACHERS === "true" && user.type !== "teacher") {
             console.log('redirect to only teachers page');
-            return res.status(204).redirect('http://localhost:3000/only-teachers');
+            return res.status(204).redirect(`${process.env.FRONTEND_URL}/only-teachers`);
         }
 
         console.log('redirect to home page');
-        return res.status(200).redirect(`http://localhost:3000/set-access-token/${accessToken}`);
+        return res.status(200).redirect(`${process.env.FRONTEND_URL}/set-access-token/${accessToken}`);
       }
   
       const token = await generateTokenAndScheduleDeletion(user.id);
@@ -257,12 +257,12 @@ const googleCallback = async (req, res) => {
       const verifyEmail = await teacherEmail.findOne({ where: { email: userEmail } });
 
       if(process.env.ONLYTEACHERS === "true" && !verifyEmail) {
-        return res.status(204).redirect('http://localhost:3000/only-teachers');
+        return res.status(204).redirect(`${process.env.FRONTEND_URL}/only-teachers`);
       } else {
         if (verifyEmail) {
-            res.redirect(`http://localhost:3000/google-auth/complete-profile-teacher/${token}`);
+            res.redirect(`${process.env.FRONTEND_URL}/google-auth/complete-profile-teacher/${token}`);
         } else {
-            res.redirect(`http://localhost:3000/google-auth/complete-profile-student/${token}`);
+            res.redirect(`${process.env.FRONTEND_URL}/google-auth/complete-profile-student/${token}`);
         }
     }
 
