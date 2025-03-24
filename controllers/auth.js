@@ -170,6 +170,9 @@ const googleCallback = async (req, res) => {
         redirect_uri: REDIRECT_URI,
         grant_type: "authorization_code",
       });
+
+      console.log('data: ', data);
+      console.log('redirect_uri: ', REDIRECT_URI);
   
       const { access_token } = data;
   
