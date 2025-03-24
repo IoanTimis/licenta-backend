@@ -160,6 +160,13 @@ async function generateTokenAndScheduleDeletion(userId) {
 }
 
 const googleCallback = async (req, res) => {
+
+    console.log("Sending token request to Google:", {
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        code,
+        redirect_uri: REDIRECT_URI,
+      });      
     try {
       const { code } = req.query;
 
