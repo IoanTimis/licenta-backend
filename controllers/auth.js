@@ -173,6 +173,7 @@ const googleCallback = async (req, res) => {
 
       console.log('data: ', data);
       console.log('redirect_uri: ', REDIRECT_URI);
+      console.log("frontend url: ", process.env.FRONTEND_URL);
   
       const { access_token } = data;
   
