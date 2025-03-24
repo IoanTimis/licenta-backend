@@ -115,6 +115,13 @@ const logout = (req, res) => {
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+console.log('REDIRECT_URI:', REDIRECT_URI);
+if (!REDIRECT_URI) {
+    console.error("REDIRECT_URI is undefined");
+    return res.status(500).send("Missing REDIRECT_URI");
+  }
+  
+
 
 const googleLogin = (req, res) => {
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=profile email`;
