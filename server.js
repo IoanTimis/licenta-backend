@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const frontend_url = process.env.FRONTEND_URL;
 
 const allowedOrigins = [
     'http://localhost:3000', 
-    'http://localhost:8080'   
+    'http://localhost:8080',
+    `${frontend_url}`   
 ];
 
 app.use(cors({
