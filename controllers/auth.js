@@ -25,7 +25,6 @@ const checkSession = (req, res) => {
 
 const refreshAccessToken = (req, res) => {
   try {
-    console.log("Refresh token request:", req.cookies.refreshToken);
     const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {
@@ -33,8 +32,6 @@ const refreshAccessToken = (req, res) => {
     }
 
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-
-    console.log("Decoded refresh token:", decoded);
 
     if (!decoded || !decoded.role) {
       return res.status(403).json({ error: "Invalid refresh token payload" });
