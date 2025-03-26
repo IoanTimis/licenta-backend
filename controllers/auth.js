@@ -56,7 +56,7 @@ const refreshAccessToken = (req, res) => {
       userData.title = decoded.title;
     }
 
-    const newAccessToken = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: "2m" });
+    const newAccessToken = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: "15m" });
 
     return res.status(200).json({ accessToken: newAccessToken });
 
@@ -68,7 +68,7 @@ const refreshAccessToken = (req, res) => {
 
 const generateTokens = (user) => {
     
-    const accessToken = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "2m" });
+    const accessToken = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "15m" });
 
     const refreshToken = jwt.sign(user, process.env.JWT_REFRESH_SECRET, { expiresIn: "30d" });
 
