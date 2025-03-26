@@ -264,9 +264,9 @@ const googleCallback = async (req, res) => {
         return res.status(204).redirect(`${process.env.FRONTEND_URL}/only-teachers`);
       } else {
         if (verifyEmail) {
-            res.redirect(`${process.env.FRONTEND_URL}/google-auth/complete-profile-teacher/${token}`);
+            res.redirect(`${process.env.FRONTEND_URL}/auth/complete-profile-teacher/${token}`);
         } else {
-            res.redirect(`${process.env.FRONTEND_URL}/google-auth/complete-profile-student/${token}`);
+            res.redirect(`${process.env.FRONTEND_URL}/auth/complete-profile-student/${token}`);
         }
     }
 
