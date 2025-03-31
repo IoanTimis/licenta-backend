@@ -332,6 +332,7 @@ const studentRequest = async (req, res) => {
     const requestId = req.params.id;
     const refreshToken = req.cookies.refreshToken;
     const user = req.user;
+    const teacherId = user.id;
 
     const request = await topicRequest.findByPk(requestId,
       {
