@@ -27,7 +27,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 var dotenv = require('dotenv');
-dotenv.config();
+
+if (process.env.NODE_ENV === 'production') {
+    dotenv.config({ path: '.env.production' });
+} else {
+    dotenv.config({ path: '.env.local' });
+}
 
 const bcrypt = require('bcryptjs');
 
@@ -43,8 +48,9 @@ const topic = require('./models/topic');
 const specializationTopic = require('./models/specializationTopic');
 const topicRequest = require('./models/topicRequest');
 
-
-sequelize.sync({ force: false, logging: console.log })
+//at first run u can set force true to make sure tables are created, might need to create the database first(make sure is the same name as in .env file)
+// after that set it to false to avoid dropping existing tables,
+sequelize.sync({ force: false, logging: console.log }) // Set force: true to drop tables and recreate them
     .then(() => {
         console.log('Database & tables created!');
     })
@@ -67,6 +73,6 @@ app.use('/', authRoutes);
 const generalRoutes = require('./routes/general');
 app.use('/', generalRoutes);
 
-app.listen(8080, () => {
-    console.log('Server is running on port 8080');
+app.listen(8082, () => {
+    console.log('Server is running on port 8082');
 });
