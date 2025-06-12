@@ -65,7 +65,7 @@ const refreshAccessToken = (req, res) => {
 
 const generateTokens = (user) => {
     
-    const accessToken = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "15m" });
+    const accessToken = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "3m" });
 
     const refreshToken = jwt.sign(user, process.env.JWT_REFRESH_SECRET, { expiresIn: "30d" });
 
@@ -88,10 +88,11 @@ const login = async (req, res) => {
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "None",
-            maxAge: 30 * 24 * 60 * 60 * 1000, // 30 zile
+            secure:   process.env.NODE_ENV === "production",             
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge:   30 * 24 * 60 * 60 * 1000,
         });
+
         
         console.log("User logat =============================",user);
 
@@ -238,11 +239,12 @@ const googleCallback = async (req, res) => {
         const { accessToken, refreshToken } = generateTokens(payload);
 
         res.cookie("refreshToken", refreshToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "None",
-          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+            httpOnly: true,
+            secure:   process.env.NODE_ENV === "production",             
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge:   30 * 24 * 60 * 60 * 1000,
         });
+
 
         console.log("usertype: ", user.type, " ,process.env.ONLYTEACHERS: ", process.env.ONLYTEACHERS);
         if(process.env.ONLYTEACHERS === "true" && user.type !== "teacher") {
