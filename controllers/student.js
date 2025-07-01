@@ -453,7 +453,7 @@ const newRequest = async (req, res) => {
       ]
     });
 
-    console.log(topic_data.specializations);
+    // console.log(topic_data.specializations);
 
     if (!topic_data) {
       return res.status(404).json({ message: 'Topic not found' });
@@ -463,8 +463,11 @@ const newRequest = async (req, res) => {
       return res.status(403).json({ message: 'Forbidden, no slots available' });
     }
 
+    // console.log("student_data: ", student_data);
+    // console.log("student_data.education_level: ", student_data.education_level);
+    // console.log("topic_data.education_level: ", topic_data.education_level);
     //Check student education level
-    if (student_data.education_level !== education_level) {
+    if (student_data.education_level !== topic_data.education_level) {
       return res.status(403).json({ message: 'Forbidden, education lvl do not match' });
     }
 
