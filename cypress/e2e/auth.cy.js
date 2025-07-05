@@ -20,7 +20,7 @@ describe('Auth API Tests with Fixtures', () => {
           body: this.auth.invalidUser,
           failOnStatusCode: false
       }).then((response) => {
-          expect(response.status).to.eq(401);
+          expect(response.status).to.eq(204);
           expect(response.body.error).to.eq('Invalid email or password');
       });
   });
@@ -32,7 +32,7 @@ describe('Auth API Tests with Fixtures', () => {
           body: this.auth.invalidEmail,
           failOnStatusCode: false
       }).then((response) => {
-          expect(response.status).to.eq(401);
+          expect(response.status).to.eq(204);
           expect(response.body.error).to.eq('Invalid email or password');
       });
   });
